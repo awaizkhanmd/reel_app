@@ -1,6 +1,23 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import { useEffect, useState } from 'react'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+
+
+import type { AppProps } from "next/app";
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const [isSSR, setIsSSR] = useState(true);
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
+
+  if (isSSR) return null;
+
+  return (
+    <div>
+
+      <Component {...pageProps} />
+    </div>
+
+  );
+};
